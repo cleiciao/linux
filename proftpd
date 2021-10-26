@@ -1,0 +1,19 @@
+Instalação e configuração servidor FTP Linux Debian
+
+Primeiramente iremos atualizar nosso S.O
+
+apt update && apt upgrade -y
+
+Instalação do Serviço Proftpd 
+
+
+apt install proftpd -y 
+
+
+Verficar se o serviço esta rodando
+
+
+systemctl status proftpd.service
+
+
+
