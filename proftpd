@@ -22,6 +22,10 @@ passwd suporte
 
 groupadd ftp
 
+Vamos adicionar o usuario suporte ao grupo ftp
+
+ gpasswd -a suporte ftp
+
 
 Iremos configurar as pastas de cada usário e as permissões de acesso de cada um:
 
