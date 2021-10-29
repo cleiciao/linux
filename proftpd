@@ -15,5 +15,51 @@ Verficar se o serviço esta rodando
 
 systemctl status proftpd.service
 
+Antes de iniciarmos a configurações do PROFTPD, vamos criar os grupos e usuários:
+useradd suporte
+
+passwd suporte
+
+groupadd ftp
 
 
+Iremos configurar as pastas de cada usário e as permissões de acesso de cada um:
+
+Primeiramente criaremos as pastas do usuário
+mkdir /mnt/ftp/arquivos
+
+Definindo dono da pasta
+
+chown suporte:ftp /mnt/ftp/arquivos
+
+Acesse o arquivo proftpd.conf, o caminho para encontrá-lo é o seguinte:
+
+/etc/proftpd/proftpd.conf
+
+
+ServerName "ProFTPD" > nome do seu servidor
+ServerType inetd
+DefaultServer on
+
+Port 21 > porta padrão recomendo alterar por segurança
+Umask 022
+MaxInstances 30
+
+User site #usuário criado por você
+Group teste #grupo criado por você
+
+DefaultRoot /mnt/ftp/arquivos #raiz de onde será a pasta do seu proftpd
+<Directory /mnt/ftp/arquivo/> #raiz de onde será a pasta do seu proftpd
+AllowOverwrite on #daqui pra frente você liberará o acesso a pasta
+<Limit WRITE>
+AllowAll
+</Limit>
+<Limit CREATE>
+AllowAll
+</Limit>
+<Limit EXECUTE>
+AllowAll
+</Limit>
+</Directory>
+
+/etc/init.d/proftpd restart
