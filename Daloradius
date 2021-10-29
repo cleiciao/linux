@@ -190,3 +190,6 @@ A interface da web de gerenciamento daloRADIUS pode ser acessada no URL abaixo:
 http://server_ip_or_hostname/daloradius
 
  
+ Os detalhes de login padrão são:
+ Username: administrator
+ Password: radius
