@@ -63,3 +63,6 @@ AllowAll
 </Directory>
 
 /etc/init.d/proftpd restart
+
+
+ftp://seu_número_de_ip:porta
