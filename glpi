@@ -1,0 +1,97 @@
+Procedimento de instalação GLPI
+
+Vamos remover o source do CD
+vim /etc/apt/sources.list
+
+comentar a linha que chama o cdrom (utiliza-se # no início da linha para comentá-la)
+
+Adicionar repositórios
+
+
+# echo "deb http://deb.debian.org/debian stretch main" >> /etc/apt/sources.list
+# echo "deb-src http://deb.debian.org/debian stretch main" >> /etc/apt/sources.list
+# echo "deb http://deb.debian.org/debian-security/ stretch/updates main" >> /etc/apt/sources.list
+# echo "deb-src http://deb.debian.org/debian-security/ stretch/updates main" >> /etc/apt/sources.list
+# echo "deb http://deb.debian.org/debian stretch-updates main" >> /etc/apt/sources.list
+# echo "deb-src http://deb.debian.org/debian stretch-updates main" >> /etc/apt/sources.list
+# apt-get update
+
+
+Instalar pré-requisitos obrigatórios
+https://glpi-install.readthedocs.io/en/latest/prerequisites.html
+
+# apt-get install apache2 php php-curl php-gd php-cli php-mbstring php-mysql php-xml -y
+# apt-get install mysql-server -y
+
+
+Instalar pré-requisitos opcionais
+# apt-get install php-cli php-cas php-imap php-ldap php-xmlrpc php-soap php-snmp php-apcu -y
+
+
+Instalar utilidades
+# apt-get install zip unzip bzip2 unrar-free vim -y
+
+
+
+Ajustes no php.ini
+# find / -iname php.ini
+
+# vim /etc/php/7.0/apache2/php.ini
+
+memory_limit = 64M ; // max memory limit
+file_uploads = on ;
+max_execution_time = 600 ; // not mandatory but adviced
+register_globals = off ; // not mandatory but adviced
+magic_quotes_sybase = off ;
+session.auto_start = off ;
+session.use_trans_sid = 0 ; // not mandatory but adviced
+
+
+
+Início instalação GLPI
+# cd /tmp
+# wget https://github.com/glpi-project/glpi/releases/download/9.3.3/glpi-9.3.3.tgz
+# tar -xvzf glpi-9.3.3.tgz
+# cp -Rf glpi /var/www/html
+
+
+
+Permissões para a pasta do GLPI
+# chmod 775 /var/www/html/* -Rf
+# chown www-data. /var/www/html/* -Rf
+
+
+
+Criação do banco de dados do GLPI
+# mysql -uroot -p
+# mysql> create database glpi;
+# mysql> create user 'glpi'@'localhost' identified by '123456';
+# mysql> grant all on glpi.* to glpi identified by '123456';
+# mysql> quit;
+
+
+Se der erro de metodo de autenticação rodar o esse comando
+
+#ALTER USER 'glpi'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456'; 
+
+
+Configuração de segurança de diretórios do GLPi
+“Acesso web ao diretório de arquivos não deveria ser permitido
+Verifique a configuração do arquivo .htaccess e do servidor web.”
+
+# vim /etc/apache2/conf-available/glpi.conf
+
+<Directory "/var/www/html/glpi">    
+       AllowOverride All
+</Directory>
+
+# a2enconf glpi.conf
+# service apache2 restart 
+
+
+Agora com todas as configurações realizadas na parte do servidor podemos continuar a configuração do server no navegador.
+http://ipdohost/glpi
+
+Só seguir as estapas e no fim irá solictar usuário e senha 
+user: glpi
+pass: glpi
