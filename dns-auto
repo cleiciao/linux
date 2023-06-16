@@ -1,0 +1,17 @@
+Instalação e configuração de um servidor Autoritativo
+
+Nesse passo a passo iremos instalar e configurar dois servidor autoritativos. Aqui irei demonstrar em uma rede local
+mas a configuração é a mesma caso tenha IPs publicos e queira disponibilizar acesso a rede publica.
+
+
+Para esse passo a passo iremos utilizar o BIND para criarmos o servidor de autoridade.
+Especificações de hardware para a VM
+
+Proc: 1 vCPU
+Mem: 1G
+Disc: 15G
+
+Obs: Serão duas maquina virtuais para subir DNS-A e DNS-B 
+
+
+
