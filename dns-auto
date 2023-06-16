@@ -13,5 +13,13 @@ Disc: 15G
 
 Obs: Serão duas maquina virtuais para subir DNS-A e DNS-B 
 
+Iremos utilizar o distribuição linux Debian na versão mais atual a 12. 
+Link para download
+
+
+https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.0.0-amd64-netinst.iso
+
+
+
 
 
