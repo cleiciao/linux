@@ -35,18 +35,3 @@ echo -e "${YELLOW} -------------------------------------------------------------
 echo
 
 
-echo "Digite a senha para executar este script:"
-read -s SENHA_DIGITADA
-
-# Validar se a senha digitada está correta
-if [ "$SENHA_DIGITADA" != "$SENHA" ]; then
-    echo
-    echo -e "${RED} Senha incorreta! O script será encerrado.${RESET}"
-    #echo "Senha incorreta! O script será encerrado."
-    echo
-    exit 1
-fi
-
-# Se a senha estiver correta, continuar com o script
-echo "Senha correta! Executando o script..."
-
